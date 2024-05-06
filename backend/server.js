@@ -7,7 +7,7 @@ const dotenv = require("dotenv");
 const { resultRoutes } = require("./Routes/results");
 const app = express();
 const corsOrigin = process.env.CORS_URL;
-
+const PORT = process.env.PORT || 8002;
 dotenv.config();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
