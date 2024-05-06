@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import BASE_URL from "../constants";
 function Upload() {
   const [isUploadable, setIsUploadable] = useState(false);
   const [allGames, setAllGames] = useState([]);
@@ -50,7 +51,7 @@ function Upload() {
 
   const getAllGames = async () => {
     try {
-      const res = await axios.get("http://localhost:8002/games");
+      const res = await axios.get(`${BASE_URL}games`);
       setAllGames(res.data.gameDoc);
     } catch (err) {
       console.log(err);
@@ -81,7 +82,7 @@ function Upload() {
 
   const addNewClip = async (reqBody) => {
     try {
-      const res = await axios.post("http://localhost:8002/clips", reqBody);
+      const res = await axios.post(`${BASE_URL}/clips`, reqBody);
       console.log(res);
     } catch (err) {
       console.log(err);
