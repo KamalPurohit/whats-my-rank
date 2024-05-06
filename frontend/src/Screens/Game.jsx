@@ -58,7 +58,7 @@ function Game() {
     setShowModal(true);
   };
 
-  console.log(results.current);
+
   const handleContinue = () => {
     if (clipNo < 2) {
       setClipId(randomClips[clipNo + 1].clipId);
@@ -81,7 +81,7 @@ function Game() {
     }
   }, [gameId]);
 
-  console.log(gameDetails, clipId, randomClips);
+
 
   return (
     <>
@@ -170,6 +170,7 @@ function Game() {
                       className={`flex  rounded-full w-10 h-10 text-center justify-center items-center aspect-square font-semibold ${
                         idx <= clipNo ? `bg-blue-500` : `bg-gray-500`
                       } ${idx == clipNo && `bg-green-500`}`}
+                      key={idx}
                     >
                       {idx <= clipNo ? idx + 1 : <CiLock />}
                     </div>
@@ -198,6 +199,7 @@ function Game() {
                       <img
                         src={rank.rankLogo}
                         alt={rank.name}
+                        key={idx}
                         className="w-20 h-20 cursor-pointer hover:scale-125 transition duration-200 ease-in-out"
                         onClick={() => checkAnswer(idx + 1)}
                       />

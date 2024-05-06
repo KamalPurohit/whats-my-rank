@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import BASE_URL from "../constants";
 
 import ResultCard from "../components/ResultCard";
@@ -9,6 +9,8 @@ import { Tooltip } from "react-tooltip";
 
 function Results() {
   const location = useLocation();
+  
+ 
   const { results, gameId, points, shortId } = location.state;
   const [gameDetails, setGameDetails] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -17,7 +19,6 @@ function Results() {
     try {
       const res = await axios.get(`${BASE_URL}games/banner/${gameId}`);
       setGameDetails(res.data);
-
       setIsLoading(false);
     } catch (err) {
       console.log(err);
@@ -38,6 +39,8 @@ function Results() {
     }
   }, [gameId]);
 
+  
+
   useEffect(() => {
     if (shortId && gameDetails.name && gameDetails.bannerImg) {
       const reqBody = {
@@ -53,7 +56,6 @@ function Results() {
     }
   }, [shortId, gameDetails]);
 
-  console.log(shortId, gameId, points, results, gameDetails);
   return (
     <div className="w-full relative bg-[#141414] min-h-[100vh] pb-10 flex flex-col  items-center pt-10 gap-20 text-white font-Mont">
       {!isLoading && (

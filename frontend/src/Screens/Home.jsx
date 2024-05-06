@@ -18,7 +18,6 @@ function Home() {
   }, []);
 
   const navigate = useNavigate();
-  console.log(allGames);
   return (
     <div className="w-full bg-[#141414] min-h-[100vh] pb-10 flex flex-col items-center pt-10 gap-20">
       <div className="flex  items-center justify-evenly gap-10 w-full h-full flex-wrap">
@@ -30,6 +29,7 @@ function Home() {
                 
               }}
               state={{ gameId: game._id }}
+              key={idx}
             >
               <div className="flex flex-col items-center justify-center cursor-pointer w-48 overflow-hidden  hover:border-2 hover:border-white">
                 <img

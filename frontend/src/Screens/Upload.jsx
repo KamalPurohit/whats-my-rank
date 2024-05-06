@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import BASE_URL from "../constants";
 function Upload() {
-  const [isUploadable, setIsUploadable] = useState(false);
+ 
   const [allGames, setAllGames] = useState([]);
   const [selectedGameId, setSelectedGameId] = useState(null);
   const [selectedGame, setSelectedGame] = useState(null);
@@ -57,7 +57,6 @@ function Upload() {
       console.log(err);
     }
   };
-  console.log(selectedGame, selectedGameId, clipData);
 
   const handleFormChange = (e) => {
     const { value, name } = e.target;
@@ -82,10 +81,21 @@ function Upload() {
 
   const addNewClip = async (reqBody) => {
     try {
-      const res = await axios.post(`${BASE_URL}/clips`, reqBody);
+      const res = await axios.post(`${BASE_URL}clips`, reqBody);
       console.log(res);
+      toast.success("Clip Uploaded!✨");
+      setClipData({
+        rank: "",
+        userName: "",
+        clipUrl: "",
+        clipId: "",
+      })
     } catch (err) {
       console.log(err);
+      if( err.response.status == 400){
+        toast.error("Clip already exist")
+        
+      }
     }
   };
 
@@ -149,6 +159,7 @@ function Upload() {
               className="bg-[#3a3a3a]  px-4 py-2"
               placeholder="Enter video Link"
               onChange={handleFormChange}
+              value={clipData.clipUrl}
             />
             <label className="self-start" htmlFor="clipUrl">
               Username *
@@ -160,6 +171,7 @@ function Upload() {
               className="bg-[#3a3a3a] px-4 py-2 "
               placeholder="Enter in Game username"
               onChange={handleFormChange}
+              value={clipData.userName}
             />
             <label className="self-start" htmlFor="rank">
               Rank *
@@ -169,7 +181,9 @@ function Upload() {
               id="rank"
               className="bg-[#3a3a3a] px-4 py-2 w-[215.5px]"
               onChange={handleFormChange}
+              value={clipData.rank}
             >
+            <option value="">Select a Rank</option>
               {selectedGame?.ranks.map((rank, idx) => {
                 return (
                   <option value={idx + 1} key={idx + 1}>

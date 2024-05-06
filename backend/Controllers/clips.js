@@ -6,14 +6,21 @@ const addNewClip = async (req, res) => {
   if (!userName || !clipUrl || !rank || !clipId || !gameId) {
     return res.status(400).json({ message: "please enter all feilds" });
   }
-  await clip.create({
-    userName,
-    clipUrl,
-    rank,
-    clipId,
-    gameId,
-  });
-  return res.json({ message: "success" });
+  try{
+    const result  = await clip.create({
+      userName,
+      clipUrl,
+      rank,
+      clipId,
+      gameId,
+    });
+    return res.json({ message: "success" });
+  }
+  catch(err){
+    if(err.code == 11000) return res.status(400).json({message:'clip already exists'});
+    return res.status(500).json({message:'internal server error'})
+  }
+ 
 };
 
 const getRandomClips = async (req, res) => {
