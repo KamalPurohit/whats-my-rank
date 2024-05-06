@@ -73,14 +73,14 @@ function Results() {
           <input
             type="text "
             className="text-black font-semibold border-2 border-black rounded p-2"
-            value={` http://localhost:5173/results/${shortId}`}
+            value={` https://whatsmyrank.onrender.com/${shortId}`}
             readOnly
           />
           <FaClipboard
             className="w-6 text-black bg-white h-full cursor-pointer outline-none border-none"
             onClick={() => {
               navigator.clipboard.writeText(
-                `http://localhost:5173/results/${shortId}`
+                `https://whatsmyrank.onrender.com/${shortId}`
               );
               setCopied(true)
             }}
