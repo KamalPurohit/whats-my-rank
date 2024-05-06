@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 8002;
 dotenv.config();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
+app.use(cors({origin :"https://whatsmyrank.onrender.com"}));
 
 app.get("/", (req, res) => {
   return res.send("hello");
